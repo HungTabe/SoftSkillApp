@@ -13,3 +13,67 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Android Studio
+*.iml
+.gradle
+.idea/
+build/
+*.apk
+*.aab
+*.ap_
+*.dex
+local.properties
+captures/
+
+# Firebase
+google-services.json
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Gradle
+.gradle/
+gradlew
+gradlew.bat
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# Dependency directories
+bin/
+gen/
+out/
+
+# ProGuard
+proguard/
+
+# Keystore files
+*.jks
+*.keystore
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Editor files
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Other
+*.cache
+*.pid
+*.seed
+*.pid.lock
