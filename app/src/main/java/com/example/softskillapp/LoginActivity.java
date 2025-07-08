@@ -2,6 +2,8 @@ package com.example.softskillapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,9 +23,12 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 
 import com.bumptech.glide.Glide;
+import com.example.softskillapp.viewmodel.MainViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -49,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient googleSignInClient;
     ShapeableImageView imageView;
     TextView name, mail;
+    private MainViewModel viewModel;
+
     private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -89,6 +96,25 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
+        viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
+            @Override
+            public <T extends ViewModel> T create(Class<T> modelClass) {
+                return (T) new MainViewModel(LoginActivity.this);
+            }
+        }).get(MainViewModel.class);
+
+        viewModel.checkSupabaseConnection();
+
+        viewModel.isConnected.observe(this, isConnected -> {
+            if (isConnected != null && isConnected) {
+                Toast.makeText(this, "Kết nối Supabase thành công!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Kết nối Supabase thất bại!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
         FirebaseApp.initializeApp(this);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
@@ -112,6 +138,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = googleSignInClient.getSignInIntent();
                 activityResultLauncher.launch(intent);
+
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                }, 3000);
+
             }
         });
 
