@@ -1,0 +1,51 @@
+URL (ví dụ: https://xyz.supabase.co). :  https://kekkjzkezfcfouxykkwp.supabase.co
+anon public key (một chuỗi dài, như eyJhbGciOiJIUzI1...). : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtla2tqemtlemZjZm91eHlra3dwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0NDA5MzYsImV4cCI6MjA2NzAxNjkzNn0.IHyMhOJV39m-bcjka6OvQLMK1NsB27zsJnTwzjeO71o
+
+
+
+-- Tạo bảng users
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    email TEXT NOT NULL,
+    points INT DEFAULT 0,
+    badges TEXT[] DEFAULT '{}',
+    assessment JSONB,
+    study_frequency JSONB
+);
+
+-- Tạo bảng videos
+CREATE TABLE videos (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    title TEXT NOT NULL,
+    youtube_url TEXT NOT NULL,
+    category TEXT NOT NULL,
+    uploader_id UUID REFERENCES users(id)
+);
+
+-- Tạo bảng quizzes
+CREATE TABLE quizzes (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    video_id UUID REFERENCES videos(id),
+    question TEXT NOT NULL,
+    options TEXT[] DEFAULT '{}',
+    correct_answer INT,
+    explanation TEXT
+);
+
+-- Tạo bảng comments
+CREATE TABLE comments (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    video_id UUID REFERENCES videos(id),
+    user_id UUID REFERENCES users(id),
+    text TEXT NOT NULL,
+    timestamp BIGINT
+);
+
+-- Tạo bảng notes
+CREATE TABLE notes (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID REFERENCES users(id),
+    video_id UUID REFERENCES videos(id),
+    text TEXT NOT NULL,
+    timestamp BIGINT
+);
