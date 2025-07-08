@@ -1,41 +1,43 @@
 # SoftSkill App
 
 ## Introduction
-**SoftSkill App** is an Android application designed to help high school and university students improve soft skills (social, negotiation, office communication) through assessments, personalized learning paths, YouTube video lessons, notes, and quizzes. The interface is inspired by TikTok (vertical scrolling, vibrant, intuitive), with gamification, comments, and ads (AdMob). Built with Java in Android Studio, it uses Supabase for data storage, Firebase for Google Authentication and notifications, and YouTube for video content.
+**SoftSkill App** is an Android application for high school and university students to enhance soft skills (social, negotiation, office communication) via assessments, personalized learning paths, YouTube video lessons, notes, and quizzes. The TikTok-inspired interface (vertical scrolling, vibrant, intuitive) includes gamification, comments, and AdMob ads. Built with **Kotlin** in Android Studio, it uses **MVVM** architecture, **Supabase** for data storage, **Firebase** for authentication/notifications, and **YouTube** for video content.
 
 ## Features
 ### User
-- **Login**: Sign in with Google (Firebase Auth).
-- **Soft Skills Assessment**: Complete a 20-30 question quiz to evaluate soft skills.
-- **Learning Path**: Receive a personalized learning path based on assessment results, divided into 3 categories:
-  - **Social**: Social interaction and relationship building.
-  - **Negotiation**: Negotiation and conflict resolution.
-  - **Office Communication**: Professional communication (emails, meetings).
-- **Video Lessons**: Swipe vertically (TikTok-style) to watch YouTube-embedded videos by category (YouTube Android Player API).
-- **Notes**: Take notes while watching videos (Supabase).
-- **Quiz**: Answer quizzes after videos, view results (score, answers, explanations).
-- **Study Frequency**: Track learning consistency (login frequency, streaks) in Profile.
+- **Login**: Google Sign-In (Firebase Auth).
+- **Soft Skills Assessment**: 20-30 question quiz to evaluate skills.
+- **Learning Path**: Personalized path based on assessment, split into:
+  - **Social**: Social interaction, relationship building.
+  - **Negotiation**: Negotiation, conflict resolution.
+  - **Office Communication**: Professional emails, meetings.
+- **Video Lessons**: TikTok-style vertical swiping for YouTube videos (YouTube Android Player API).
+- **Notes**: Save notes during videos (Supabase).
+- **Quiz**: Post-video quizzes with scores, answers, explanations.
+- **Study Frequency**: Track login streaks in Profile.
 - **Social Interaction**:
   - Comment on videos (Supabase).
-  - Share videos via social media (Deep Link).
-  - View uploader’s profile by clicking their icon.
-- **Gamification**: Earn points (+10/quiz), badges (“Beginner”, “Expert”), and view top 100 leaderboard.
-- **Profile**: Display avatar, name, points, badges, study frequency, and tabs for uploaded/liked videos (TikTok-style).
-- **Ads**: Banner, Interstitial, Rewarded ads (AdMob).
+  - Share via social media (Deep Link).
+  - View uploader profiles.
+- **Gamification**: Earn points (+10/quiz), badges (“Beginner”, “Expert”), top 100 leaderboard.
+- **Profile**: Avatar, name, points, badges, study frequency, uploaded/liked videos (TikTok-style).
+- **Ads**: Banner, Interstitial, Rewarded (AdMob).
 
 ### Admin
-- Manage video metadata and quizzes (Supabase Dashboard).
+- Manage video metadata, quizzes (Supabase Dashboard).
 - Send notifications for new lessons (FCM).
 
 ## Technologies
-- **Language**: Java.
+- **Language**: Kotlin.
 - **IDE**: Android Studio.
-- **Supabase**: Data storage (users, videos, quizzes, comments, notes).
+- **Architecture**: MVVM.
+- **Build Tool**: Gradle with Kotlin DSL.
+- **Supabase**: Store users, videos, quizzes, comments, notes.
 - **Firebase**:
   - Auth: Google Sign-In.
   - Cloud Messaging: Notifications.
-- **YouTube Android Player API**: Embedded video playback.
-- **AdMob**: Advertisements.
+- **YouTube Android Player API**: Video playback.
+- **AdMob**: Ads.
 - **Material Design 3**: UI (colors: red #FF0000, white #FFFFFF, gold #FFD700).
 - **ViewPager2**: Video swiping.
 - **RecyclerView**: Comments, leaderboard.
@@ -43,12 +45,12 @@
 
 ## System Requirements
 - Android 5.0+ (min SDK 24).
-- Internet connection (Supabase, Firebase, AdMob, YouTube).
+- Internet (Supabase, Firebase, AdMob, YouTube).
 - Google Play Services (login, ads).
 
 ## Installation
 ### For Users
-- (Coming soon) Download from Google Play Store: Search “SoftSkill App” and tap “Install”.
+- (Coming soon) Google Play Store: Search “SoftSkill App” and install.
 
 ### For Developers
 1. **Clone Repository**:
@@ -58,73 +60,81 @@
 2. **Open Project**:
    - Open Android Studio, select `SoftSkillApp` project.
 3. **Configure Firebase and Supabase**:
-   - Download `google-services.json` from Firebase Console, place in `app/`.
+   - Add `google-services.json` from Firebase Console to `app/`.
    - Enable Google Sign-In, FCM in Firebase Console.
-   - Set up Supabase project, create tables, and note API URL/key.
+   - Set up Supabase project, create tables, note API URL/key.
 4. **Sync Gradle**:
-   - `build.gradle` (App):
-     ```gradle
+   - `build.gradle.kts` (App):
+     ```kotlin
      plugins {
-         id 'com.android.application'
-         id 'com.google.gms.google-services'
+         id("com.android.application")
+         id("org.jetbrains.kotlin.android")
+         id("com.google.gms.google-services")
      }
+
      android {
-         namespace 'com.example.softskillapp'
-         compileSdk 35
+         namespace = "com.example.softskillapp"
+         compileSdk = 35
          defaultConfig {
-             applicationId 'com.example.softskillapp'
-             minSdk 24
-             targetSdk 35
-             versionCode 1
-             versionName "1.0"
+             applicationId = "com.example.softskillapp"
+             minSdk = 24
+             targetSdk = 35
+             versionCode = 1
+             versionName = "1.0"
          }
          buildTypes {
-             release {
-                 minifyEnabled false
-                 proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+             getByName("release") {
+                 isMinifyEnabled = false
+                 proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
              }
          }
          compileOptions {
-             sourceCompatibility JavaVersion.VERSION_11
-             targetCompatibility JavaVersion.VERSION_11
+             sourceCompatibility = JavaVersion.VERSION_11
+             targetCompatibility = JavaVersion.VERSION_11
+         }
+         kotlinOptions {
+             jvmTarget = "11"
          }
      }
+
      dependencies {
-         implementation 'androidx.appcompat:appcompat:1.7.0'
-         implementation 'com.google.android.material:material:1.12.0'
-         implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-         implementation 'androidx.viewpager2:viewpager2:1.1.0'
-         implementation 'androidx.lifecycle:lifecycle-viewmodel:2.8.6'
-         implementation 'androidx.lifecycle:lifecycle-livedata:2.8.6'
-         implementation 'com.google.firebase:firebase-auth:23.0.0'
-         implementation 'com.google.firebase:firebase-messaging:24.0.0'
-         implementation 'com.google.android.gms:play-services-ads:23.0.0'
-         implementation 'com.google.android.youtube:youtube-android-player-api:1.2.2'
-         implementation 'androidx.media3:media3-exoplayer:1.4.0'
-         implementation 'com.google.android.gms:play-services-auth:21.2.0'
-         implementation 'io.github.jan-tennert.supabase:realtime-kt:2.4.0'
-         implementation 'io.github.jan-tennert.supabase:postgrest-kt:2.4.0'
+         implementation("androidx.core:core-ktx:1.13.1")
+         implementation("androidx.appcompat:appcompat:1.7.0")
+         implementation("com.google.android.material:material:1.12.0")
+         implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+         implementation("androidx.viewpager2:viewpager2:1.1.0")
+         implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6")
+         implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.6")
+         implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
+         implementation("com.google.firebase:firebase-messaging-ktx:24.0.0")
+         implementation("com.google.android.gms:play-services-ads:23.0.0")
+         implementation("com.google.android.youtube:youtube-android-player-api:1.2.2")
+         implementation("androidx.media3:media3-exoplayer:1.4.0")
+         implementation("com.google.android.gms:play-services-auth:21.2.0")
+         implementation("io.github.jan-tennert.supabase:realtime-kt:2.4.0")
+         implementation("io.github.jan-tennert.supabase:postgrest-kt:2.4.0")
      }
      ```
 5. **Run**:
    - Build and run on emulator (API 34) or device.
 
 ## Usage
-1. **Login**: Sign in with Google.
+
+1. **Login**: Google Sign-In.
 2. **Assessment**: Complete soft skills quiz.
 3. **Learning Path**: View personalized path (Social, Negotiation, Office Communication).
-4. **Videos**: Swipe to watch YouTube videos by category, take notes.
-5. **Quiz**: Answer quizzes, view results (score, explanations).
-6. **Social**: Comment, share videos, view uploader profiles.
-7. **Profile**: Check points, badges, study frequency, uploaded/liked videos.
-8. **Notifications**: Receive learning reminders and new lesson alerts.
+4. **Videos**: Swipe for YouTube videos, take notes.
+5. **Quiz**: Answer quizzes, view results.
+6. **Social**: Comment, share, view uploader profiles.
+7. **Profile**: Check points, badges, study frequency, videos.
+8. **Notifications**: Get learning reminders, new lesson alerts.
 
 ## Project Structure
 ```
 app/
 ├── data/
-│   ├── model/ (User, Video, Quiz, Comment, Note)
-│   ├── repository/ (UserRepository, VideoRepository, QuizRepository)
+│   ├── model/ (User, Video, Quiz, Comment, Note - Kotlin data classes)
+│   ├── repository/ (UserRepository, VideoRepository, QuizRepository - Kotlin)
 ├── ui/
 │   ├── splash/ (SplashActivity)
 │   ├── auth/ (LoginActivity)
@@ -133,9 +143,8 @@ app/
 │   ├── video/ (MainFragment)
 │   ├── quiz/ (QuizFragment, QuizResultFragment)
 │   ├── profile/ (ProfileFragment)
-│   ├── comments/ (CommentsFragment)
-├── viewmodel/ (UserViewModel, VideoViewModel, QuizViewModel)
-└── util/ (AdManager, NotificationHelper)
+├── viewmodel/ (UserViewModel, VideoViewModel, QuizViewModel - Kotlin, MVVM)
+└── util/ (AdManager, NotificationHelper - Kotlin)
 ```
 
 ## Permissions
@@ -144,28 +153,31 @@ app/
 
 ## 2-Week Coding Roadmap
 ### Week 1
-- **Day 1**: Set up project, Supabase, Firebase, models (`User`, `Video`, `Quiz`, `Comment`, `Note`).
+- **Day 1**: Set up project, Supabase, Firebase, Kotlin data classes (`User`, `Video`, `Quiz`, `Comment`, `Note`).
 - **Day 2**: Splash Screen (`SplashActivity`), Google Sign-In (`LoginActivity`).
-- **Day 3**: Soft skills assessment (`AssessmentFragment`), save results to Supabase.
-- **Day 4**: Learning path (`RoadmapFragment`), display 3 categories.
+- **Day 3**: Assessment (`AssessmentFragment`), save results to Supabase.
+- **Day 4**: Learning path (`RoadmapFragment`), 3 categories.
+
 - **Day 5**: Video feed (`MainFragment`), YouTube videos, uploader icon.
 - **Day 6-7**: Quiz (`QuizFragment`), results (`QuizResultFragment`).
 
 ### Week 2
-- **Day 8**: Video notes (`MainFragment`, Supabase `notes`).
+- **Day 8**: Video notes (`MainFragment`, Supabase).
 - **Day 9**: Comments (`CommentsFragment`), video sharing (Deep Link).
 - **Day 10**: Profile (`ProfileFragment`, Videos/Liked tabs), gamification.
-- **Day 11**: Study frequency tracking (`UserRepository`, streak display).
+- **Day 11**: Study frequency (`UserRepository`, streaks).
 - **Day 12**: Notifications (FCM), ads (AdMob).
-- **Day 13-14**: Unit tests (JUnit), UI tests (Espresso), create AAB, publish to Google Play.
+- **Day 13-14**: Unit tests (Kotlin, JUnit), UI tests (Espresso), create AAB, publish to Google Play.
 
 ## Contributing
-- Fork the repository and submit pull requests.
-- Report bugs or suggest features via Issues.
+- Fork, submit pull requests.
+- Report bugs, suggest features via Issues.
+
 
 ## License
 - MIT License.
 
 ## Contact
 - Email: <your_email@example.com>
-- GitHub: <your_github_profile>
+- GitHub: <https://github.com/HungTabe>
+
