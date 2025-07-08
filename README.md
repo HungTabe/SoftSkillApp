@@ -119,6 +119,7 @@
    - Build and run on emulator (API 34) or device.
 
 ## Usage
+
 1. **Login**: Google Sign-In.
 2. **Assessment**: Complete soft skills quiz.
 3. **Learning Path**: View personalized path (Social, Negotiation, Office Communication).
@@ -156,6 +157,7 @@ app/
 - **Day 2**: Splash Screen (`SplashActivity`), Google Sign-In (`LoginActivity`).
 - **Day 3**: Assessment (`AssessmentFragment`), save results to Supabase.
 - **Day 4**: Learning path (`RoadmapFragment`), 3 categories.
+
 - **Day 5**: Video feed (`MainFragment`), YouTube videos, uploader icon.
 - **Day 6-7**: Quiz (`QuizFragment`), results (`QuizResultFragment`).
 
@@ -171,9 +173,11 @@ app/
 - Fork, submit pull requests.
 - Report bugs, suggest features via Issues.
 
+
 ## License
 - MIT License.
 
 ## Contact
 - Email: <your_email@example.com>
 - GitHub: <https://github.com/HungTabe>
+
