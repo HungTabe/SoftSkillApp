@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import fpt.edu.vn.softskillappv2.data.repository.UserRepository
 import fpt.edu.vn.softskillappv2.data.repository.VideoRepository
 import fpt.edu.vn.softskillappv2.ui.auth.LoginActivity
+import fpt.edu.vn.softskillappv2.ui.assessment.AssessmentActivity
 import fpt.edu.vn.softskillappv2.util.SharedPrefsManager
 import kotlinx.coroutines.launch
 
@@ -43,13 +44,18 @@ class MainActivity : AppCompatActivity() {
         // Display user info
         displayUserInfo()
         
+        // Set up assessment button
+        findViewById<com.google.android.material.button.MaterialButton>(R.id.btnAssessment).setOnClickListener {
+            startAssessment()
+        }
+        
         // Set up logout button
         findViewById<com.google.android.material.button.MaterialButton>(R.id.btnLogout).setOnClickListener {
             logout()
         }
         
         // Test Supabase connection
-        testSupabaseConnection()
+        // testSupabaseConnection()
     }
     
     private fun testSupabaseConnection() {
@@ -95,6 +101,16 @@ class MainActivity : AppCompatActivity() {
             
             Toast.makeText(this, "Welcome ${user.displayName}!", Toast.LENGTH_SHORT).show()
         }
+    }
+    
+    private fun startAssessment() {
+        val currentUser = auth.currentUser
+        val userId = currentUser?.email?.hashCode() ?: 0
+        
+        val intent = Intent(this, AssessmentActivity::class.java).apply {
+            putExtra(AssessmentActivity.EXTRA_USER_ID, userId)
+        }
+        startActivity(intent)
     }
     
     private fun navigateToLogin() {

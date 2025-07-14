@@ -8,12 +8,12 @@ data class User(
     val email: String,
     val points: Int = 0,
     val badges: List<String> = emptyList(),
-    val assessment: AssessmentResult? = null,
+    val assessment: AssessmentResult_type? = null,
     val study_frequency: StudyFrequency? = null
 )
 
 @Serializable
-data class AssessmentResult(
+data class AssessmentResult_type(
     val level: String? = null,
     val score: Int? = null
 )

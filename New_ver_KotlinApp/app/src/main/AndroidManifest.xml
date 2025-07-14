@@ -79,6 +79,16 @@
             android:name=".MainActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+            
+        <activity
+            android:name=".ui.assessment.AssessmentActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+            
+        <activity
+            android:name=".ui.assessment.AssessmentResultActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
