@@ -16,79 +16,74 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Softskillappv2"
         tools:targetApi="31">
-        
+        <activity
+            android:name=".ui.TodoTestActivity"
+            android:exported="false" />
         <!-- TODO: AdMob App ID - Enable when needed -->
         <!--
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
         -->
-        
         <activity
-            android:name=".ui.auth.LoginActivity"
+            android:name=".ui.NavBarTestActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="false"
-            android:theme="@style/Theme.Splash"
-            android:screenOrientation="portrait" />
-        
+            
+            android:theme="@style/Theme.Splash" />
         <activity
-            android:name=".ui.TodoTestActivity"
+            android:name=".ui.auth.LoginActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
-        
-<!--        <activity-->
-<!--            android:name=".ui.auth.LoginActivity"-->
-<!--            android:exported="false"-->
-<!--            android:screenOrientation="portrait" />-->
-<!--            -->
-<!--        <activity-->
-<!--            android:name=".ui.splash.SplashActivity"-->
-<!--            android:exported="false"-->
-<!--            android:screenOrientation="portrait" />-->
-<!--            -->
-<!--        <activity-->
-<!--            android:name=".ui.assessment.AssessmentActivity"-->
-<!--            android:exported="false"-->
-<!--            android:screenOrientation="portrait" />-->
-<!--            -->
-<!--        <activity-->
-<!--            android:name=".ui.video.VideoPlayerActivity"-->
-<!--            android:exported="false"-->
-<!--            android:screenOrientation="portrait" />-->
-<!--            -->
-<!--        <activity-->
-<!--            android:name=".ui.quiz.QuizActivity"-->
-<!--            android:exported="false"-->
-<!--            android:screenOrientation="portrait" />-->
-<!--            -->
-<!--        <activity-->
-<!--            android:name=".ui.profile.ProfileActivity"-->
-<!--            android:exported="false"-->
-<!--            android:screenOrientation="portrait" />-->
-
+             /> <!-- <activity -->
+        <!-- android:name=".ui.auth.LoginActivity" -->
+        <!-- android:exported="false" -->
+        <!--  /> -->
+        <!--  -->
+        <!-- <activity -->
+        <!-- android:name=".ui.splash.SplashActivity" -->
+        <!-- android:exported="false" -->
+        <!--  /> -->
+        <!--  -->
+        <!-- <activity -->
+        <!-- android:name=".ui.assessment.AssessmentActivity" -->
+        <!-- android:exported="false" -->
+        <!--  /> -->
+        <!--  -->
+        <!-- <activity -->
+        <!-- android:name=".ui.video.VideoPlayerActivity" -->
+        <!-- android:exported="false" -->
+        <!--  /> -->
+        <!--  -->
+        <!-- <activity -->
+        <!-- android:name=".ui.quiz.QuizActivity" -->
+        <!-- android:exported="false" -->
+        <!--  /> -->
+        <!--  -->
+        <!-- <activity -->
+        <!-- android:name=".ui.profile.ProfileActivity" -->
+        <!-- android:exported="false" -->
+        <!--  /> -->
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
-            
+             />
         <activity
             android:name=".ui.assessment.AssessmentActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
-            
+             />
         <activity
             android:name=".ui.assessment.AssessmentResultActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+             />
     </application>
 
 </manifest>
