@@ -46,4 +46,26 @@ class SharedPrefsManager(context: Context) {
     fun clearUserData() {
         prefs.edit().clear().apply()
     }
+
+    companion object {
+        fun saveUserEmail(context: Context, email: String) {
+            val prefs = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
+            prefs.edit().putString(Constants.PREF_USER_EMAIL, email).apply()
+        }
+
+        fun saveUserId(context: Context, userId: String) {
+            val prefs = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
+            prefs.edit().putString(Constants.PREF_USER_ID, userId).apply()
+        }
+
+        fun setLoggedIn(context: Context, isLoggedIn: Boolean) {
+            val prefs = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
+            prefs.edit().putBoolean(Constants.PREF_IS_LOGGED_IN, isLoggedIn).apply()
+        }
+
+        fun clearUserData(context: Context) {
+            val prefs = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
+            prefs.edit().clear().apply()
+        }
+    }
 } 

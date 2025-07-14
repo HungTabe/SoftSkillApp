@@ -20,6 +20,24 @@ class UserRepository {
         }
     }
 
+    suspend fun createOrUpdateUser(user: User): User = withContext(Dispatchers.IO) {
+        try {
+            // Check if user exists
+            val existingUser = getUserByEmail(user.email).getOrNull()
+            
+            if (existingUser != null) {
+                // User exists, return existing user
+                existingUser
+            } else {
+                // Create new user
+                val result = createUser(user)
+                result.getOrThrow()
+            }
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
     suspend fun getUserByEmail(email: String): Result<User?> = withContext(Dispatchers.IO) {
         try {
             val response = postgrest.from("users").select {
