@@ -7,6 +7,8 @@ DROP TABLE comments;
 DROP TABLE quizzes;
 DROP TABLE videos;
 DROP TABLE users;
+DROP TABLE assessment_results;
+DROP TABLE assessment_questions;
 
 Lệnh dựng db
 -- Tạo bảng users
@@ -65,6 +67,26 @@ CREATE TABLE quiz_results (
     is_correct BOOLEAN NOT NULL,
     score INT NOT NULL,
     completed_at BIGINT
+);
+
+-- Tạo bảng assessment_questions để lưu trữ thư viện câu hỏi đánh giá kỹ năng mềm
+CREATE TABLE assessment_questions (
+    id SERIAL PRIMARY KEY,
+    question TEXT NOT NULL,
+    options TEXT[] DEFAULT '{}',  -- Mảng các lựa chọn (ví dụ: {'Lựa chọn A', 'Lựa chọn B', ...})
+    option_scores INT[] DEFAULT '{}',  -- Mảng điểm số tương ứng với từng lựa chọn (ví dụ: {1, 4, 2, 3} cho A=1, B=4, C=2, D=3)
+    explanation TEXT,  -- Giải thích chi tiết cho lựa chọn tối ưu và lý do chấm điểm
+    category TEXT NOT NULL  -- Danh mục: 'social', 'negotiation', 'office_communication'
+);
+
+-- Tạo bảng assessment_results để lưu trữ kết quả trả lời của người dùng
+CREATE TABLE assessment_results (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    question_id INT REFERENCES assessment_questions(id) ON DELETE CASCADE,
+    user_answer INT NOT NULL,  -- Chỉ số lựa chọn của người dùng (bắt đầu từ 0)
+    score INT NOT NULL,  -- Điểm số cho lựa chọn của người dùng (tra cứu từ option_scores)
+    completed_at BIGINT  -- Thời gian hoàn thành (Unix timestamp)
 );
 
 
@@ -147,3 +169,16 @@ INSERT INTO quiz_results (quiz_id, user_id, user_answer, is_correct, score, comp
 (6, 8, 0, FALSE, 0, 1726454400000),
 (7, 9, 3, TRUE, 10, 1726540800000),
 (8, 10, 1, FALSE, 0, 1726627200000);
+
+-- Seed data cho bảng assessment_questions
+INSERT INTO assessment_questions (question, options, option_scores, explanation, category) VALUES
+('You are at a university group project meeting where a new team member seems quiet and hesitant to share ideas. What would you do?', '{"A. Ignore them and focus on your own contributions to avoid awkwardness", "B. Politely ask them a direct question about their thoughts to include them", "C. Make a joke about their silence to lighten the mood", "D. Wait for someone else to engage them while you observe"}', '{1,4,2,3}', 'Option B (4 points) is optimal as it promotes inclusivity and relationship building. Option D (3 points) is moderately effective by observing first. Option C (2 points) risks offense, and Option A (1 point) is ineffective by excluding the member.', 'social'),
+('At a high school event, you notice a classmate standing alone and looking uncomfortable. How would you respond?', '{"A. Approach them, introduce yourself, and ask about their interests to start a conversation", "B. Wave from afar and continue with your friends", "C. Assume they prefer to be alone and do nothing", "D. Invite them to join your group but only if they seem interested"}', '{4,2,1,3}', 'Option A (4 points) demonstrates strong empathy and initiative in social interaction. Option D (3 points) is conditional but positive. Option B (2 points) is minimal engagement, and Option C (1 point) ignores potential needs.', 'social'),
+('A friend confides in you about a personal problem during a study break. What is your approach?', '{"A. Offer advice immediately based on your own experiences", "B. Listen actively without interrupting and ask how you can support them", "C. Change the subject to something lighter to cheer them up", "D. Excuse yourself as you have other commitments"}', '{3,4,2,1}', 'Option B (4 points) reflects high emotional intelligence through active listening. Option A (3 points) is helpful but may not prioritize empathy. Option C (2 points) avoids the issue, and Option D (1 point) dismisses the confidant.', 'social'),
+('During an online group chat for a class assignment, one member is dominating the discussion. How do you handle it?', '{"A. Politely suggest taking turns to ensure everyone contributes", "B. Stay silent and let the conversation proceed", "C. Interrupt to share your ideas forcefully", "D. Message the group leader privately about the issue"}', '{4,1,2,3}', 'Option A (4 points) fosters equitable participation effectively. Option D (3 points) addresses the issue discreetly. Option C (2 points) may escalate tension, and Option B (1 point) allows imbalance to continue.', 'social'),
+('In a team negotiation for project roles, two members argue over the same task. What do you do?', '{"A. Propose a compromise where both share the role and collaborate", "B. Side with the person you agree with to resolve it quickly", "C. Let them argue it out without intervening", "D. Suggest voting on it to make a fair decision"}', '{4,2,1,3}', 'Option A (4 points) encourages collaboration in conflict resolution. Option D (3 points) introduces fairness democratically. Option B (2 points) shows bias, and Option C (1 point) avoids responsibility.', 'negotiation'),
+('You are negotiating with a classmate to extend a group deadline due to your workload. They resist. How do you proceed?', '{"A. Insist on your needs and threaten to work alone if not agreed", "B. Explain your situation calmly and ask about their constraints to find mutual ground", "C. Agree to their terms reluctantly to avoid conflict", "D. Offer to take on extra work in exchange for the extension"}', '{1,4,2,3}', 'Option B (4 points) builds mutual understanding for effective negotiation. Option D (3 points) offers value in exchange. Option C (2 points) concedes without resolution, and Option A (1 point) escalates confrontation.', 'negotiation'),
+('During a debate in class, a peer harshly criticizes your idea. What is your response?', '{"A. Defend your point aggressively to counter their criticism", "B. Acknowledge their view and ask for clarification to discuss constructively", "C. Withdraw your idea to end the tension", "D. Respond with a counter-criticism of their idea"}', '{2,4,1,3}', 'Option B (4 points) promotes constructive dialogue. Option D (3 points) engages but may escalate mildly. Option A (2 points) is defensive, and Option C (1 point) avoids conflict unproductively.', 'negotiation'),
+('You need to email a professor about missing a deadline due to illness. How do you structure the email?', '{"A. Write a brief note stating the fact without details or apology", "B. Apologize professionally, explain briefly, and propose a new timeline", "C. Blame external factors extensively to justify the delay", "D. Attach proof of illness and request an extension politely"}', '{1,4,2,3}', 'Option B (4 points) maintains professionalism with accountability and solutions. Option D (3 points) adds evidence politely. Option C (2 points) shifts blame, and Option A (1 point) lacks courtesy.', 'office_communication'),
+('In a virtual meeting for a student organization, technical issues cause delays. How do you contribute?', '{"A. Wait passively for others to fix it", "B. Suggest alternative communication methods and offer to coordinate", "C. Express frustration openly to highlight the problem", "D. Politely ask the host for updates while preparing notes"}', '{1,4,2,3}', 'Option B (4 points) is proactive and solution-oriented. Option D (3 points) seeks information productively. Option C (2 points) may increase negativity, and Option A (1 point) is passive.', 'office_communication'),
+('You receive feedback on a report from a mentor that includes constructive criticism. How do you reply?', '{"A. Thank them briefly and ignore the suggestions", "B. Express gratitude, acknowledge the points, and outline how you will implement changes", "C. Defend your original work point by point", "D. Ask for clarification on specific feedback while thanking them"}', '{1,4,2,3}', 'Option B (4 points) shows receptiveness and professionalism. Option D (3 points) seeks understanding gratefully. Option C (2 points) is defensive, and Option A (1 point) dismisses input.', 'office_communication');
