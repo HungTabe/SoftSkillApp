@@ -5,13 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".ui_fragment.home">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home Fragment"
-        android:textSize="26dp"
-        android:layout_gravity="center"
-        />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/videoViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
 
 </FrameLayout>

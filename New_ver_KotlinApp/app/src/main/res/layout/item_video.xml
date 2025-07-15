@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- WebView để embed YouTube video -->
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Cột nút bên phải -->
+    <LinearLayout
+        android:id="@+id/rightButtonColumn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginEnd="36dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnShare"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_assignment_48"
+            android:contentDescription="Share"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tvQuizz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quizz"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="8dp" />
+
+        <ImageButton
+            android:id="@+id/btnLike"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_check_48"
+            android:contentDescription="Like"
+            android:layout_marginTop="8dp"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tvLikeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2.5k"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="2dp" />
+
+        <ImageButton
+            android:id="@+id/btnComment"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_comment_48"
+            android:contentDescription="Comment"
+            android:layout_marginTop="8dp"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tvCommentCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="156"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
+
+    <!-- Thông tin người đăng, mô tả, hashtag -->
+    <LinearLayout
+        android:id="@+id/bottomInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Video description here"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tvHashtags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#hashtag1 #hashtag2"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

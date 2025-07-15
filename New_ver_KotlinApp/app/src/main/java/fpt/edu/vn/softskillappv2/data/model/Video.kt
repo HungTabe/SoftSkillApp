@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class Video(
     val id: Int = 0,
     val title: String,
-    val youtubeUrl: String,
+    val youtube_url: String,
     val category: String,
-    val uploaderId: Int? = null
+    val uploader_id: Int? = null
 ) 
