@@ -39,34 +39,47 @@ class VideoAdapter(
         private val tvUsername: TextView = itemView.findViewById(R.id.tvUsername)
         private val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
         private val tvHashtags: TextView = itemView.findViewById(R.id.tvHashtags)
-        // Có thể bổ sung thêm các view khác nếu cần
 
         @SuppressLint("SetJavaScriptEnabled")
         fun bind(video: Video) {
-            // Embed YouTube video
+            // Embed YouTube video with minimal UI
             val youtubeId = extractYoutubeId(video.youtube_url)
             val html = """
-                <html><body style='margin:0;'>
-                <iframe width='100%' height='100%' src='https://www.youtube.com/embed/$youtubeId?autoplay=0&controls=1' frameborder='0' allowfullscreen></iframe>
-                </body></html>
+                <html>
+                    <body style='margin:0;padding:0;'>
+                        <iframe 
+                            width='100%' 
+                            height='100%' 
+                            src='https://www.youtube.com/embed/$youtubeId?controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&autoplay=0' 
+                            frameborder='0' 
+                            allowfullscreen>
+                        </iframe>
+                    </body>
+                </html>
             """.trimIndent()
-            webView.settings.javaScriptEnabled = true
-            webView.settings.pluginState = WebSettings.PluginState.ON
-            webView.webViewClient = WebViewClient()
-            webView.loadDataWithBaseURL(null, html, "text/html", "utf-8", null)
 
-            // Bind info
+            // Configure WebView settings
+            with(webView.settings) {
+                javaScriptEnabled = true
+                pluginState = WebSettings.PluginState.ON
+                loadWithOverviewMode = true
+                useWideViewPort = true
+            }
+            webView.webViewClient = WebViewClient()
+            webView.loadDataWithBaseURL("https://www.youtube.com", html, "text/html", "utf-8", null)
+
+            // Bind other UI elements
             tvUsername.text = video.uploader_id?.toString() ?: "Unknown"
             tvDescription.text = video.title
             tvHashtags.text = "#${video.category}"
 
-            // Nút Quizz, Like, Share
+            // Set click listeners for Quizz, Like, Share
             tvQuizz.setOnClickListener { onQuizzClick(video) }
             btnLike.setOnClickListener { onLikeClick(video) }
             btnShare.setOnClickListener { onShareClick(video) }
         }
 
-        // Helper để lấy YouTube video ID từ URL
+        // Helper to extract YouTube video ID from URL
         private fun extractYoutubeId(url: String): String? {
             val regex = Regex("(?:v=|be/|embed/)([a-zA-Z0-9_-]{11})")
             val match = regex.find(url)
