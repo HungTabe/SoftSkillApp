@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import fpt.edu.vn.softskillappv2.R
 import fpt.edu.vn.softskillappv2.data.model.Video
 import fpt.edu.vn.softskillappv2.data.repository.VideoRepository
+import fpt.edu.vn.softskillappv2.ui_fragment.CommentFragment
 import kotlinx.coroutines.launch
 
 class home : Fragment() {
@@ -49,6 +50,9 @@ class home : Fragment() {
                     onQuizzClick = { video ->
                         Toast.makeText(requireContext(), "Quizz for: ${'$'}{video.title}", Toast.LENGTH_SHORT).show()
                         // TODO: Mở quiz liên quan video
+                    },
+                    onCommentClick = { video ->
+                        openCommentFragment(video)
                     }
                 )
                 viewPager.adapter = videoAdapter
@@ -56,5 +60,13 @@ class home : Fragment() {
                 Toast.makeText(requireContext(), "Không thể tải video", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun openCommentFragment(video: Video) {
+        val commentFragment = CommentFragment.newInstance(video)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.frame_layout, commentFragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

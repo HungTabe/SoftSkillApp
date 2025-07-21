@@ -17,7 +17,8 @@ class VideoAdapter(
     private val videos: List<Video>,
     private val onLikeClick: (Video) -> Unit,
     private val onShareClick: (Video) -> Unit,
-    private val onQuizzClick: (Video) -> Unit
+    private val onQuizzClick: (Video) -> Unit,
+    private val onCommentClick: (Video) -> Unit
 ) : RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
@@ -35,6 +36,7 @@ class VideoAdapter(
         private val webView: WebView = itemView.findViewById(R.id.webView)
         private val btnLike: ImageButton = itemView.findViewById(R.id.btnLike)
         private val btnShare: ImageButton = itemView.findViewById(R.id.btnShare)
+        private val btnComment: ImageButton = itemView.findViewById(R.id.btnComment)
         private val tvQuizz: TextView = itemView.findViewById(R.id.tvQuizz)
         private val tvUsername: TextView = itemView.findViewById(R.id.tvUsername)
         private val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
@@ -73,10 +75,11 @@ class VideoAdapter(
             tvDescription.text = video.title
             tvHashtags.text = "#${video.category}"
 
-            // Set click listeners for Quizz, Like, Share
+            // Set click listeners for Quizz, Like, Share, Comment
             tvQuizz.setOnClickListener { onQuizzClick(video) }
             btnLike.setOnClickListener { onLikeClick(video) }
             btnShare.setOnClickListener { onShareClick(video) }
+            btnComment.setOnClickListener { onCommentClick(video) }
         }
 
         // Helper to extract YouTube video ID from URL

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="Back"
+            app:tint="@android:color/black" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Comments"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:gravity="center" />
+
+        <View
+            android:layout_width="48dp"
+            android:layout_height="48dp" />
+    </LinearLayout>
+
+    <!-- Comments List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvComments"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toTopOf="@id/commentInputLayout" />
+
+    <!-- Comment Input Area -->
+    <LinearLayout
+        android:id="@+id/commentInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <EditText
+            android:id="@+id/etComment"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/comment_input_background"
+            android:hint="Add a comment..."
+            android:textColor="@color/black"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:padding="12dp"
+            android:textSize="14sp" />
+
+        <ImageButton
+            android:id="@+id/btnSendComment"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/send_button_background"
+            android:contentDescription="Send"
+            android:src="@drawable/ic_send"
+            app:tint="@android:color/white" />
+    </LinearLayout>
+
+<!--    &lt;!&ndash; Advertisement Section &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/adLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:padding="16dp"-->
+<!--        android:background="@drawable/ad_background"-->
+<!--        android:gravity="center"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/bottomNavLayout">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Advertisement"-->
+<!--            android:textColor="@android:color/darker_gray"-->
+<!--            android:textSize="14sp" />-->
+<!--    </LinearLayout>-->
+
+    <!-- Bottom Navigation -->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/bottomNavLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:background="@android:color/white"-->
+<!--        android:padding="8dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:src="@drawable/baseline_home_24"-->
+<!--                app:tint="@color/design_default_color_primary" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Home"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textColor="@color/design_default_color_primary"-->
+<!--                android:layout_marginTop="2dp" />-->
+
+<!--            <View-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="2dp"-->
+<!--                android:background="@color/design_default_color_primary"-->
+<!--                android:layout_marginTop="2dp" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:src="@drawable/baseline_explore_24"-->
+<!--                app:tint="@android:color/darker_gray" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Discover"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textColor="@android:color/darker_gray"-->
+<!--                android:layout_marginTop="2dp" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:src="@drawable/baseline_add_box_24"-->
+<!--                app:tint="@android:color/darker_gray" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Create"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textColor="@android:color/darker_gray"-->
+<!--                android:layout_marginTop="2dp" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:src="@drawable/baseline_person_24"-->
+<!--                app:tint="@android:color/darker_gray" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Profile"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textColor="@android:color/darker_gray"-->
+<!--                android:layout_marginTop="2dp" />-->
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout> 
