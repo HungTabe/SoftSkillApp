@@ -7,4 +7,5 @@
     <color name="red">#FFFF0000</color>
     <color name="light_gray">#FFF5F5F5</color>
     <color name="orange">#FFFF6B35</color>
+    <color name="primaryRed">#D32F2F</color>
 </resources>

@@ -2,6 +2,9 @@ package fpt.edu.vn.softskillappv2.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import fpt.edu.vn.softskillappv2.data.model.LocalNote
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.util.UUID
 
 class SharedPrefsManager(context: Context) {
@@ -45,6 +48,33 @@ class SharedPrefsManager(context: Context) {
 
     fun clearUserData() {
         prefs.edit().clear().apply()
+    }
+
+    // Note storage methods
+    fun saveNote(note: LocalNote) {
+        val notes = getNotes().toMutableList()
+        notes.add(note)
+        saveNotes(notes)
+    }
+
+    fun getNotes(): List<LocalNote> {
+        val notesJson = prefs.getString(Constants.PREF_NOTES, "[]")
+        return try {
+            Json.decodeFromString(notesJson ?: "[]")
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    fun deleteNote(noteId: String) {
+        val notes = getNotes().toMutableList()
+        notes.removeAll { it.id == noteId }
+        saveNotes(notes)
+    }
+
+    private fun saveNotes(notes: List<LocalNote>) {
+        val notesJson = Json.encodeToString(notes)
+        prefs.edit().putString(Constants.PREF_NOTES, notesJson).apply()
     }
 
     companion object {

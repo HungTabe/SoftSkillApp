@@ -33,17 +33,7 @@ class SplashActivity : AppCompatActivity() {
     }
     
     private fun navigateToNextScreen() {
-        val sharedPrefsManager = (application as SoftSkillApplication).sharedPrefsManager
-        
-        val intent = if (sharedPrefsManager.isLoggedIn()) {
-            // Nếu đã đăng nhập, chuyển đến MainActivity
-            Intent(this, MainActivity::class.java)
-        } else {
-            // Nếu chưa đăng nhập, có thể chuyển đến LoginActivity (nếu có)
-            // Hoặc vẫn chuyển đến MainActivity để test
-            Intent(this, MainActivity::class.java)
-        }
-        
+        val intent = Intent(this, fpt.edu.vn.softskillappv2.ui.auth.LoginActivity::class.java)
         startActivity(intent)
         finish()
     }

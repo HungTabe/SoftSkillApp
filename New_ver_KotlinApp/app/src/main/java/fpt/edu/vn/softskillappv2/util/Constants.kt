@@ -32,6 +32,7 @@ object Constants {
     const val PREF_USER_EMAIL = "user_email"
     const val PREF_IS_LOGGED_IN = "is_logged_in"
     const val PREF_ASSESSMENT_COMPLETED = "assessment_completed"
+    const val PREF_NOTES = "notes"
     
     // Bundle Keys
     const val BUNDLE_VIDEO_ID = "video_id"
