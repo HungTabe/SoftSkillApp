@@ -40,7 +40,12 @@ class home : Fragment() {
                 videoAdapter = VideoAdapter(
                     videos,
                     onLikeClick = { video ->
-                        Toast.makeText(requireContext(), "Liked: ${'$'}{video.title}", Toast.LENGTH_SHORT).show()
+                        val message = if (video.isLiked) {
+                            "Liked: ${video.title}"
+                        } else {
+                            "Unliked: ${video.title}"
+                        }
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                         // TODO: Gọi update likes nếu muốn
                     },
                     onShareClick = { video ->

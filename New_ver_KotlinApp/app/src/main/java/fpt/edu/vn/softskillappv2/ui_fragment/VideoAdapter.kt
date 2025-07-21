@@ -9,6 +9,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import fpt.edu.vn.softskillappv2.R
 import fpt.edu.vn.softskillappv2.data.model.Video
@@ -75,11 +76,24 @@ class VideoAdapter(
             tvDescription.text = video.title
             tvHashtags.text = "#${video.category}"
 
+            // Update like button appearance based on current state
+            updateLikeButtonAppearance(video.isLiked)
+
             // Set click listeners for Quizz, Like, Share, Comment
             tvQuizz.setOnClickListener { onQuizzClick(video) }
-            btnLike.setOnClickListener { onLikeClick(video) }
+            btnLike.setOnClickListener { 
+                video.isLiked = !video.isLiked
+                updateLikeButtonAppearance(video.isLiked)
+                onLikeClick(video) 
+            }
             btnShare.setOnClickListener { onShareClick(video) }
             btnComment.setOnClickListener { onCommentClick(video) }
+        }
+
+        private fun updateLikeButtonAppearance(isLiked: Boolean) {
+            val colorRes = if (isLiked) R.color.like_green else R.color.white
+            val color = ContextCompat.getColor(itemView.context, colorRes)
+            btnLike.setColorFilter(color)
         }
 
         // Helper to extract YouTube video ID from URL

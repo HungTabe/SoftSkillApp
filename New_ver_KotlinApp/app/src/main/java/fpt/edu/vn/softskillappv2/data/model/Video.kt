@@ -11,5 +11,6 @@ data class Video(
     val title: String,
     val youtube_url: String,
     val category: String,
-    val uploader_id: Int? = null
+    val uploader_id: Int? = null,
+    var isLiked: Boolean = false
 ) : Parcelable 
