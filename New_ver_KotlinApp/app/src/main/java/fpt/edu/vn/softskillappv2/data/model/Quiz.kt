@@ -5,20 +5,20 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Quiz(
     val id: Int = 0,
-    val videoId: Int,
+    val video_id: Int,
     val question: String,
     val options: List<String> = emptyList(),
-    val correctAnswer: Int? = null,
+    val correct_answer: Int? = null,
     val explanation: String? = null
 )
 
 @Serializable
 data class QuizResult(
     val id: Int = 0,
-    val quizId: Int,
-    val userId: Int,
-    val userAnswer: Int,
-    val isCorrect: Boolean,
+    val quiz_id: Int,
+    val user_id: Int,
+    val user_answer: Int,
+    val is_correct: Boolean,
     val score: Int,
-    val completedAt: Long? = null
+    val completed_at: Long? = null
 ) 

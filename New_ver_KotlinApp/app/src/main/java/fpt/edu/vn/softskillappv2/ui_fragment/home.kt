@@ -44,12 +44,12 @@ class home : Fragment() {
                         // TODO: Gọi update likes nếu muốn
                     },
                     onShareClick = { video ->
-                        Toast.makeText(requireContext(), "Share: ${'$'}{video.title}", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(), "Share: ${'$'}{video.title}", Toast.LENGTH_SHORT).show()
                         // TODO: Thêm logic share
+                        openQuizFragment(video)
                     },
                     onQuizzClick = { video ->
-                        Toast.makeText(requireContext(), "Quizz for: ${'$'}{video.title}", Toast.LENGTH_SHORT).show()
-                        // TODO: Mở quiz liên quan video
+                        openQuizFragment(video)
                     },
                     onCommentClick = { video ->
                         openCommentFragment(video)
@@ -66,6 +66,14 @@ class home : Fragment() {
         val commentFragment = CommentFragment.newInstance(video)
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.frame_layout, commentFragment)
+            .addToBackStack(null)
+            .commit()
+    }
+    
+    private fun openQuizFragment(video: Video) {
+        val quizFragment = QuizFragment.newInstance(video)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.frame_layout, quizFragment)
             .addToBackStack(null)
             .commit()
     }
