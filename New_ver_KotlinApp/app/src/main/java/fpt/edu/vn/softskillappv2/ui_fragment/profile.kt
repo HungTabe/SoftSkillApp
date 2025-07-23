@@ -17,6 +17,7 @@ import fpt.edu.vn.softskillappv2.R
 import fpt.edu.vn.softskillappv2.data.model.Video
 import fpt.edu.vn.softskillappv2.util.SharedPrefsManager
 import fpt.edu.vn.softskillappv2.viewmodel.ProfileViewModel
+import com.bumptech.glide.Glide
 
 class profile : Fragment() {
 
@@ -27,6 +28,7 @@ class profile : Fragment() {
     // UI Components
     private lateinit var profilePicture: ImageView
     private lateinit var userName: TextView
+    private lateinit var userEmail: TextView
     private lateinit var userTitle: TextView
     private lateinit var userPoints: TextView
     private lateinit var userLevel: TextView
@@ -36,8 +38,7 @@ class profile : Fragment() {
     private lateinit var videoRecyclerView: RecyclerView
     private lateinit var tabLayout: TabLayout
     private lateinit var loadingIndicator: ProgressBar
-    private lateinit var backButton: ImageView
-    private lateinit var editProfileButton: ImageView
+    private lateinit var logoutButton: com.google.android.material.button.MaterialButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,11 +56,22 @@ class profile : Fragment() {
         setupTabLayout()
         setupClickListeners()
         observeViewModel()
+
+        // Hiển thị avatar Google nếu có
+        val avatarUrl = SharedPrefsManager.getUserAvatar(requireContext())
+        if (!avatarUrl.isNullOrEmpty()) {
+            Glide.with(this)
+                .load(avatarUrl)
+                .placeholder(R.drawable.baseline_person_24)
+                .circleCrop()
+                .into(profilePicture)
+        }
     }
 
     private fun initializeViews(view: View) {
         profilePicture = view.findViewById(R.id.profilePicture)
         userName = view.findViewById(R.id.userName)
+        userEmail = view.findViewById(R.id.userEmail)
         userTitle = view.findViewById(R.id.userTitle)
         userPoints = view.findViewById(R.id.userPoints)
         userLevel = view.findViewById(R.id.userLevel)
@@ -69,8 +81,7 @@ class profile : Fragment() {
         videoRecyclerView = view.findViewById(R.id.videoRecyclerView)
         tabLayout = view.findViewById(R.id.tabLayout)
         loadingIndicator = view.findViewById(R.id.loadingIndicator)
-        backButton = view.findViewById(R.id.backButton)
-        editProfileButton = view.findViewById(R.id.editProfileButton)
+        logoutButton = view.findViewById(R.id.logoutButton)
     }
 
     private fun setupViewModel() {
@@ -106,14 +117,8 @@ class profile : Fragment() {
     }
 
     private fun setupClickListeners() {
-        backButton.setOnClickListener {
-            // Handle back button click
-            requireActivity().onBackPressed()
-        }
-
-        editProfileButton.setOnClickListener {
-            // Handle edit profile click
-            Toast.makeText(context, "Edit Profile clicked", Toast.LENGTH_SHORT).show()
+        logoutButton.setOnClickListener {
+            logout()
         }
     }
 
@@ -147,6 +152,7 @@ class profile : Fragment() {
 
     private fun updateUserInfo(user: fpt.edu.vn.softskillappv2.data.model.User) {
         userName.text = user.name
+        userEmail.text = user.email
         userTitle.text = user.title
         userPoints.text = "${viewModel.formatPoints(user.points)} points"
         userLevel.text = "Level ${user.level}"
@@ -186,6 +192,18 @@ class profile : Fragment() {
             count >= 1000 -> "${count / 1000}.${(count % 1000) / 100}k"
             else -> count.toString()
         }
+    }
+
+    private fun logout() {
+        // Đăng xuất Firebase
+        com.google.firebase.auth.FirebaseAuth.getInstance().signOut()
+        // Xóa thông tin user trong SharedPrefs
+        sharedPrefsManager.clearUserData()
+        // Chuyển về LoginActivity
+        val intent = android.content.Intent(requireContext(), fpt.edu.vn.softskillappv2.ui.auth.LoginActivity::class.java)
+        intent.flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     companion object {

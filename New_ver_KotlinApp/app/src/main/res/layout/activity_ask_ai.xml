@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="0dp">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:elevation="4dp"
+        app:title="Hỏi đáp với AI SoftSkill"
+        app:titleTextColor="@color/black"
+        app:navigationIcon="@drawable/ic_arrow_back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="#F8F8F8"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/etSituation"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="Nhập tình huống giao tiếp bạn muốn hỏi..."
+                android:gravity="top|start"
+                android:background="@android:color/transparent"
+                android:padding="16dp"
+                android:textSize="16sp"
+                android:inputType="textMultiLine"
+                android:maxLines="6" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAskAI"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Gửi cho AI SoftSkill"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:icon="@drawable/ic_send"
+            app:iconGravity="textStart"
+            app:cornerRadius="24dp"
+            style="@style/Widget.MaterialComponents.Button"
+            android:backgroundTint="@color/black"
+            android:layout_marginBottom="16dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="#F8F8F8">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+                <TextView
+                    android:id="@+id/tvAIAnswer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:padding="16dp"
+                    android:background="@android:color/transparent" />
+            </ScrollView>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</LinearLayout> 

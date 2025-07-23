@@ -77,6 +77,14 @@ class SharedPrefsManager(context: Context) {
         prefs.edit().putString(Constants.PREF_NOTES, notesJson).apply()
     }
 
+    fun saveUserAvatar(avatarUrl: String) {
+        prefs.edit().putString("user_avatar", avatarUrl).apply()
+    }
+
+    fun getUserAvatar(): String? {
+        return prefs.getString("user_avatar", null)
+    }
+
     companion object {
         fun saveUserEmail(context: Context, email: String) {
             val prefs = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
@@ -96,6 +104,15 @@ class SharedPrefsManager(context: Context) {
         fun clearUserData(context: Context) {
             val prefs = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
             prefs.edit().clear().apply()
+        }
+
+        fun saveUserAvatar(context: Context, avatarUrl: String) {
+            val prefs = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
+            prefs.edit().putString("user_avatar", avatarUrl).apply()
+        }
+        fun getUserAvatar(context: Context): String? {
+            val prefs = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
+            return prefs.getString("user_avatar", null)
         }
     }
 } 

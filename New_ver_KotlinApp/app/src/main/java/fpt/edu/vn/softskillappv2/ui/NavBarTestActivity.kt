@@ -1,5 +1,6 @@
 package fpt.edu.vn.softskillappv2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -39,13 +40,11 @@ class NavBarTestActivity : AppCompatActivity() {
                 R.id.profile -> replaceFragment(profile())
                 R.id.discover -> replaceFragment(discover())
                 R.id.create -> replaceFragment(create())
-
-                else ->{
-
-
-
+                R.id.ask_ai -> {
+                    val intent = Intent(this, AskAIActivity::class.java)
+                    startActivity(intent)
                 }
-
+                else ->{}
             }
 
             true

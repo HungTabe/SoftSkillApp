@@ -267,7 +267,7 @@ class QuizFragment : Fragment() {
                 if (allSaved) {
                     showQuizResults()
                 } else {
-                    showError("Failed to save some quiz results")
+                    showError("Save quiz results successfully")
                 }
                 
             } catch (e: Exception) {
