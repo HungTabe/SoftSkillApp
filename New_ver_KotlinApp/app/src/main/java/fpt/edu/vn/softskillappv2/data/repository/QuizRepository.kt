@@ -5,15 +5,14 @@ import fpt.edu.vn.softskillappv2.data.model.QuizResult
 import fpt.edu.vn.softskillappv2.data.supabase.SupabaseClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.UUID
 
 class QuizRepository {
     private val postgrest = SupabaseClient.postgrest
 
-    suspend fun getQuizzesByVideoId(videoId: UUID): Result<List<Quiz>> = withContext(Dispatchers.IO) {
+    suspend fun getQuizzesByVideoId(videoId: Int): Result<List<Quiz>> = withContext(Dispatchers.IO) {
         try {
             val response = postgrest.from("quizzes").select {
-                filter { eq("video_id", videoId.toString()) }
+                filter { eq("video_id", videoId) }
             }
             val quizzes = response.decodeList<Quiz>()
             Result.success(quizzes)
@@ -40,10 +39,10 @@ class QuizRepository {
         }
     }
 
-    suspend fun getQuizById(quizId: UUID): Result<Quiz?> = withContext(Dispatchers.IO) {
+    suspend fun getQuizById(quizId: Int): Result<Quiz?> = withContext(Dispatchers.IO) {
         try {
             val response = postgrest.from("quizzes").select {
-                filter { eq("id", quizId.toString()) }
+                filter { eq("id", quizId) }
             }
             val quizzes = response.decodeList<Quiz>()
             Result.success(quizzes.firstOrNull())

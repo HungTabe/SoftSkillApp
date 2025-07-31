@@ -26,20 +26,18 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
         -->
         <activity
-            android:name=".ui.NavBarTestActivity"
+            android:name=".ui.splash.SplashActivity"
             android:exported="true"
-            >
+            android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.splash.SplashActivity"
-            android:exported="false"
-            
-            android:theme="@style/Theme.Splash" />
+            android:name=".ui.NavBarTestActivity"
+            android:exported="true"
+            />
         <activity
             android:name=".ui.auth.LoginActivity"
             android:exported="false"
@@ -84,6 +82,7 @@
             android:name=".ui.assessment.AssessmentResultActivity"
             android:exported="false"
              />
+        <activity android:name="fpt.edu.vn.softskillappv2.ui.AskAIActivity" />
     </application>
 
 </manifest>

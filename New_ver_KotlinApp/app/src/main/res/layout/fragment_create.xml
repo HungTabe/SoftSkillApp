@@ -1,18 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui_fragment.create">
+    android:fillViewport="true">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Fragment"
-        android:textSize="26dp"
-        android:layout_gravity="center"
-        />
+        android:background="@color/white"
+        android:orientation="vertical">
 
+        <!-- Upload Video Section -->
+        <LinearLayout
+            android:id="@+id/layout_upload_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-</FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Upload Video"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Video URL"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/et_video_url"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#FBE9E7"
+                android:hint="Video URL"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Video Title"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/et_video_title"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#FBE9E7"
+                android:hint="Video title"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/et_video_category"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#FBE9E7"
+                android:hint="Category"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+            <Button
+                android:id="@+id/btn_upload_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#A0522D"
+                android:text="Upload Video"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- Create Quiz Section -->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/layout_create_quiz"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="24dp"-->
+<!--            android:visibility="gone">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Create Quiz"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="22sp"-->
+<!--                android:layout_marginBottom="16dp" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Question"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/et_quiz_question"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Enter your question"-->
+<!--                android:layout_marginBottom="12dp" />-->
+
+<!--            <RadioGroup-->
+<!--                android:id="@+id/rg_quiz_options"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginBottom="8dp">-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_option_1"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/et_option_1"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:hint="Answer option 1" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginBottom="8dp">-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_option_2"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/et_option_2"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:hint="Answer option 2" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginBottom="8dp">-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_option_3"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/et_option_3"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:hint="Answer option 3" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginBottom="8dp">-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_option_4"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/et_option_4"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:hint="Answer option 4" />-->
+<!--                </LinearLayout>-->
+<!--            </RadioGroup>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Explanation"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_marginTop="8dp" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/et_quiz_explanation"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Add explanation for the correct answer"-->
+<!--                android:layout_marginBottom="20dp" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btn_save_quiz"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Save Quiz"-->
+<!--                    android:backgroundTint="#A0522D"-->
+<!--                    android:textColor="#fff" />-->
+
+<!--                <Space-->
+<!--                    android:layout_width="12dp"-->
+<!--                    android:layout_height="wrap_content" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btn_cancel_quiz"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Cancel"-->
+<!--                    android:backgroundTint="#FBE9E7"-->
+<!--                    android:textColor="#6D4C41" />-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
+    </LinearLayout>
+</ScrollView>

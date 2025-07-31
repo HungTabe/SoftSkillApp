@@ -148,20 +148,26 @@ class LoginActivity : AppCompatActivity() {
                     points = 0,
                     badges = emptyList()
                 )
-                
+
                 val savedUser = userRepository.createOrUpdateUser(user)
-                
+
                 // Save user info to SharedPreferences
                 SharedPrefsManager.saveUserEmail(this@LoginActivity, firebaseUser.email ?: "")
                 SharedPrefsManager.saveUserId(this@LoginActivity, savedUser.id.toString())
-                
+
+                // Lưu URL ảnh đại diện Google (nếu có)
+                val photoUrl = firebaseUser.photoUrl?.toString()
+                if (photoUrl != null) {
+                    SharedPrefsManager.saveUserAvatar(this@LoginActivity, photoUrl)
+                }
+
                 Toast.makeText(
                     this@LoginActivity, 
                     "Welcome ${firebaseUser.displayName ?: "User"}!", 
                     Toast.LENGTH_SHORT
                 ).show()
                 navigateToMain()
-                
+
             } catch (e: Exception) {
                 Log.e("LoginActivity", "Error saving user to Supabase", e)
                 Toast.makeText(
@@ -174,7 +180,7 @@ class LoginActivity : AppCompatActivity() {
     }
     
     private fun navigateToMain() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, fpt.edu.vn.softskillappv2.ui.NavBarTestActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()

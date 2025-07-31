@@ -5,7 +5,7 @@
         android:id="@+id/home"
         android:icon="@drawable/baseline_home_24"
         />
-    <item android:title="Discover"
+    <item android:title="Note"
         android:id="@+id/discover"
         android:icon="@drawable/baseline_explore_24"
         />
@@ -17,4 +17,7 @@
         android:id="@+id/profile"
         android:icon="@drawable/baseline_person_24"
         />
+    <item android:title="Hỏi AI"
+        android:id="@+id/ask_ai"
+        android:icon="@drawable/baseline_comment_48" />
 </menu>
